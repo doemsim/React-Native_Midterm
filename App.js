@@ -17,18 +17,9 @@ import Mode from './Mode';
 const COLORS = {primary: '#1f145c', white: '#fff'};
 
 const App = () => {
-
-  // return (
-  //   <View>
-      
-      
-
-  //   </View>
-  // )
   const [todos, setTodos] = React.useState([]);
   const [textInput, setTextInput] = React.useState('');
   
-
   React.useEffect(() => {
     getTodosFromUserDevice();
   }, []);
@@ -84,23 +75,20 @@ const App = () => {
 
   const deleteTodo = todoId => {
     const newTodosItem = todos.filter(item => item.id != todoId);
-    setTodos(newTodosItem);
-  };
-
-  const clearAllTodos = () => {
-    Alert.alert('Confirm', 'Are you sure you want to delete all tasks?', [
+    Alert.alert('Confirm', 'Are you sure you want to delete this task?', [
       {
         text: 'Yes',
-        onPress: () => setTodos([]),
+        onPress: () => setTodos(newTodosItem),
       },
       {
         text: 'No',
       },
     ]);
+    
   };
 
-  const clearTodos = () => {
-    Alert.alert('Confirm', 'Are you sure you want to delete this task?', [
+  const clearAllTodos = () => {
+    Alert.alert('Confirm', 'Are you sure you want to delete all tasks?', [
       {
         text: 'Yes',
         onPress: () => setTodos([]),
@@ -134,7 +122,7 @@ const App = () => {
         )}
         <TouchableOpacity onPress={() => deleteTodo(todo.id)}>
           <View style={styles.actionIcon}>
-            <Icon name="delete" size={20} color="white" onPress={ clearTodos }/>
+            <Icon name="delete" size={20} color="white"/>
           </View>
         </TouchableOpacity>
       </View>
